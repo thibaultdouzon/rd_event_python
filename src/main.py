@@ -60,7 +60,10 @@ async def get_user(id: int) -> Response[User]:
 
 
 @app.post("/user")
-async def create_user(user: User) -> Response[None]:
+async def create_user(user: User) -> Response[User]:
     logger.info(f"Appending {user = }")
-    database.append(user)
-    return Response[None](code=201, message="User created", data=None)
+    if user.id not in [user.id for user in database]:
+        database.append(user)
+        return Response[User](code=201, message="User created", data=user)
+
+    return Response[User](code=400, message="User already exists", data=None)
