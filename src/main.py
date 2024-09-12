@@ -23,11 +23,7 @@ class Response(BaseModel, Generic[T]):
     data: Optional[T] = None
 
 
-database = [
-    User(id=1, name="John Doe"),
-    User(id=2, name="Alice"),
-    User(id=3, name="Bob"),
-]
+database = [User(id=id, name=name) for id, name in enumerate(["Alice", "Bob", "Eve"])]
 
 
 @contextmanager
