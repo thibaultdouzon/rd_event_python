@@ -6,8 +6,6 @@ from fastapi import FastAPI
 from loguru import logger
 from pydantic import BaseModel
 
-logger.add("app.log", level="INFO")
-
 app = FastAPI()
 
 # Some generic type

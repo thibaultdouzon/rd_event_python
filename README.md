@@ -46,3 +46,8 @@ unfixable = ["F401"]
 "--strict"
 ],
 ```
+
+## Additional steps
+
+- `uv add pip` not everyone use exclusively uv, installing the default package manager is important
+- `mypy --install-types` to automatically install mypy extensions for dependencies you are using
