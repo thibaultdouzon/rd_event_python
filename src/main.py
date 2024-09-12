@@ -20,7 +20,7 @@ class User(BaseModel):
 class Response(BaseModel, Generic[T]):
     code: int
     message: str
-    data: Optional[T]
+    data: Optional[T] = None
 
 
 database = [
@@ -40,7 +40,7 @@ def measure_time() -> Generator[None, Any, None]:
 
 @app.get("/")
 async def index() -> Response[None]:
-    return Response[None](code=200, message="Hello, World!", data=None)
+    return Response[None](code=200, message="Hello, World!")
 
 
 @app.get("/user/{id:int}")
@@ -54,14 +54,14 @@ async def get_user(id: int) -> Response[User]:
         return Response[User](code=200, message="User found", data=user)
     except ValueError:
         logger.error(f"User with {id = } not found")
-        return Response[User](code=404, message="User not found", data=None)
+        return Response[User](code=404, message="User not found")
 
 
 @app.post("/user")
 async def create_user(user: User) -> Response[User]:
     logger.info(f"Appending {user = }")
-    if user.id not in [user.id for user in database]:
+    if user.id not in (user.id for user in database):
         database.append(user)
         return Response[User](code=201, message="User created", data=user)
 
-    return Response[User](code=400, message="User already exists", data=None)
+    return Response[User](code=400, message="User already exists")
