@@ -1,9 +1,10 @@
 FROM ubuntu:24.10
 
 RUN apt update && apt upgrade -y
-RUN apt install -y build-essential openssh-server
+RUN apt install -y build-essential openssh-server curl
 
 COPY resources /resources
+
 
 # install vscode for remote server
 RUN echo "8 37" | apt install -y ./resources/code.deb
