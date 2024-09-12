@@ -8,6 +8,8 @@
 
 ## Pyenv
 
+`curl https://pyenv.run | bash`
+
 ## UV
 
 `curl -LsSf https://astral.sh/uv/install.sh | sh`
