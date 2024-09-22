@@ -1,6 +1,6 @@
 import time
 from contextlib import contextmanager
-from typing import Any, Generator, Generic, Optional, TypeVar
+from typing import Any, Generator, Generic, NewType, Optional, TypeVar
 
 from fastapi import FastAPI
 from loguru import logger
@@ -8,12 +8,13 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+UserID = NewType("UserID", int)
 # Some generic type
 T = TypeVar("T")
 
 
 class User(BaseModel):
-    id: int
+    id: UserID
     name: str
 
 
@@ -23,7 +24,9 @@ class Response(BaseModel, Generic[T]):
     data: Optional[T] = None
 
 
-database = [User(id=id, name=name) for id, name in enumerate(["Alice", "Bob", "Eve"])]
+database = [
+    User(id=UserID(id), name=name) for id, name in enumerate(["Alice", "Bob", "Eve"])
+]
 
 
 @contextmanager
@@ -40,7 +43,7 @@ async def index() -> Response[None]:
 
 
 @app.get("/user/{id:int}")
-async def get_user(id: int) -> Response[User]:
+async def get_user(id: UserID) -> Response[User]:
     logger.info(f"Getting user with {id = }")
     try:
         with measure_time():
