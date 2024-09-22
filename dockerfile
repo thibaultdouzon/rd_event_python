@@ -8,6 +8,7 @@ RUN apt install -y build-essential openssh-server curl libssl-dev zlib1g-dev \
 COPY resources /resources
 
 
+
 # install vscode for remote server
 RUN echo "8 37" | apt install -y ./resources/code.deb
 
@@ -18,6 +19,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 
 RUN mkdir /root/dev
 WORKDIR /root/dev
+COPY src /root/dev/src_bkp
 
 EXPOSE 8000
 
