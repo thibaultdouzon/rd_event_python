@@ -43,10 +43,20 @@ unfixable = ["F401"]
 ## Settings
 
 ```json
-
-"mypy-type-checker.args": [
-"--strict"
-],
+{
+  "notebook.formatOnSave.enabled": true,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "mypy-type-checker.args": [
+    "--strict"
+  ]
+}
 ```
 
 ## Additional steps

@@ -1,16 +1,22 @@
-import requests
+from typing import Any
 
-from src.main import Response, User
+import requests
 
 url = "http://localhost:8000/"
 
 
-def get_user(id: int) -> Response[User]:
+def get_user(id: int) -> Any:
     response = requests.get(f"{url}user/{id}").json()
-    return Response[User](**response)
+    return response
 
 
-def insert_user(id: int, name: str) -> Response[User]:
-    user = User(id=id, name=name)
-    response = requests.post(f"{url}user", json=user.model_dump()).json()
-    return Response[User](**response)
+def insert_user(id: int, name: str) -> Any:
+    user = {"id": id, "name": name}
+    response = requests.post(f"{url}user", json=user).json()
+    return response
+
+
+def insert_user_additional_field(id: int, name: str, **kwargs: Any) -> Any:
+    user = {"id": id, "name": name, **kwargs}
+    response = requests.post(f"{url}user", json=user).json()
+    return response
