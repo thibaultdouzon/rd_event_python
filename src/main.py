@@ -23,9 +23,9 @@ async def get_user(id):
 
 
 @app.post("/user")
-async def create_user(user):
-    if user.id not in (user["id"] for user in database):
-        database.append(user)
-        return user
+async def create_user(new_user):
+    if new_user["id"] not in (user["id"] for user in database):
+        database.append(new_user)
+        return new_user
 
     return None
