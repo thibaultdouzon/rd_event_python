@@ -2,37 +2,27 @@
 
 # Install Cpython
 
-## Base - apt
-
-???
-
-## Pyenv
-
-`curl https://pyenv.run | bash`
-
-## UV
-
 `curl -LsSf https://astral.sh/uv/install.sh | sh`
 `uv python install 3.12`
 
-
 # Venv
-
-## UV
 
 `uv venv --python 3.12`
 
 # Project
 
-## UV
-
 `uv init <name>`
 
+Pour un projet existant
 
+`uv sync`
 
 # tool configs
 
 ## Pyproject toml
+
+Ruff supprime les imports inutilisés
+
 ```toml
 
 [tool.ruff.lint]
@@ -64,11 +54,10 @@ unfixable = ["F401"]
 - `uv add pip` not everyone use exclusively uv, installing the default package manager is important
 - `mypy --install-types` to automatically install mypy extensions for dependencies you are using
 
-
 # Presentation
 
 - sshd -D &
-- connect vscode
+- connect vscode (root@localhost:8022, mot de passe root)
 - Install uv
 - source new shell
 - uv init
@@ -79,18 +68,3 @@ unfixable = ["F401"]
   - mypy
   - (pylance)
 - add local vscode configs
-```json
-{
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.fixAll": "explicit",
-            "source.organizeImports": "explicit"
-        },
-        "editor.defaultFormatter": "charliermarsh.ruff"
-    },
-    "mypy-type-checker.args": [
-        "--strict"
-    ]
-}
-``` 
